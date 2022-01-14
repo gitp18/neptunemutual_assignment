@@ -4,6 +4,8 @@ import {ethers} from 'ethers';
 
 
 
+
+
 const WalletCardEthers = (props) => {
 	const [active, setActive] = useState(true);
 	const [errorMessage, setErrorMessage] = useState(null);
@@ -14,11 +16,8 @@ const WalletCardEthers = (props) => {
 	const [provider, setProvider] = useState(null);
 	
 
-	const connectWalletHandler = () => {
-		//console.log(window.ethereum.isConnected() ,'--------', window.ethereum,'-----',defaultAccount);
-		
+	const connectWalletHandler = () => {		
 		if (window.ethereum && defaultAccount == null) {
-			// set ethers provider
 			setProvider(new ethers.providers.Web3Provider(window.ethereum));
 
 			// connect to metamask
@@ -35,15 +34,9 @@ const WalletCardEthers = (props) => {
 			console.log('Need to install MetaMask');
 			setErrorMessage('Please install MetaMask browser extension to interact');
 		} else if (defaultAccount != null){
-			//console.log('do disconnect code here!');
-			//window.ethereum.close();	//window.ethereum.disable(); //window.ethereum.revoke()
-			//if(provider.close) {
-				//provider.clearCachedProvider();
-				//await web3Modal.clearCachedProvider();
-				setProvider(null);
-			//}			
-			  setDefaultAccount(null);
-			  props.handleClose();
+			setProvider(null);
+			setDefaultAccount(null);
+			setActive(true);
 		}
 	}
 

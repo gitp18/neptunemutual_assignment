@@ -7,6 +7,8 @@ import WalletCardEthers from "./components/WalletDetailComponent";
 
 
 
+
+
 function App() {
   const nepCurrency = 'NEP';
   const bsudCurrency = 'BSUD';
@@ -15,6 +17,10 @@ function App() {
   const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   
+  function roundToTwo(num) {
+    return +(Math.round(num + "e+2")  + "e-2");
+  }
+
   function togglePopup(){
     setIsOpen(!isOpen);
   }
@@ -32,10 +38,10 @@ function App() {
   let bsudAmount, nepValue;
   if (amountInFromCurrency) {
     nepValue = amount;
-    bsudAmount = amount * exchangeRate;
+    bsudAmount = roundToTwo(amount * exchangeRate);
   } else {
     bsudAmount = amount;
-    nepValue = amount / exchangeRate;
+    nepValue = roundToTwo(amount / exchangeRate);
   }
 
   return (
